@@ -12,3 +12,8 @@ else
 fi
 
 cp loongarch64-unknown-linux-gnu.defconfig build/.config
+cd build
+ct-ng olddefconfig
+ct-ng build
+cd ..
+rm -rf build
