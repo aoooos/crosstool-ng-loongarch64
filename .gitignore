@@ -1,4 +1,5 @@
 .build
+.config
 build.log
 include
 x-tools
