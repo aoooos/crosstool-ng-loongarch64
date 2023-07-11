@@ -1,6 +1,8 @@
 .build
+.config
 build.log
 include
 x-tools
 tmp
 build
+crosstool-ng

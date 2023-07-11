@@ -2,31 +2,18 @@
 
 set -ex
 
-#if [ $UID -eq 0 ]; then
-#    exec su rustbuild -c "$0"
-#fi
+#!/bin/bash
 
-hide_output() {
-  set +x
-  on_err="
-echo ERROR: An error was encountered with the build.
-cat ./tmp/build.log
-exit 1
-"
-  trap "$on_err" ERR
-  bash -c "while true; do sleep 30; echo \$(date) - building ...; done" &
-  PING_LOOP_PID=$!
-  "$@" &> ./tmp/build.log
-  rm ./tmp/build.log
-  trap - ERR
-  kill $PING_LOOP_PID
-  set -x
-}
+if [ ! -d "build" ]; then
+    mkdir "build"
+    echo "Created directory 'build'"
+else
+    echo "Directory 'build' already exists. Skipping creation."
+fi
 
-mkdir build
 cd build
 cp ../loongarch64-unknown-linux-gnu.defconfig .config
 ct-ng olddefconfig
-hide_output ct-ng build
+ct-ng build
 cd ..
 rm -rf build
