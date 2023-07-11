@@ -11,5 +11,4 @@ else
     echo "Directory 'build' already exists. Skipping creation."
 fi
 
-cd build
-cp ../loongarch64-unknown-linux-gnu.defconfig .config
+cp loongarch64-unknown-linux-gnu.defconfig build/.config

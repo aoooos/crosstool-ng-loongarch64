@@ -2,6 +2,7 @@
 
 set -ex
 
+cd build
 ct-ng olddefconfig
 ct-ng build
 cd ..
