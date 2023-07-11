@@ -11,7 +11,7 @@ else
     rm -rf crosstool-ng
     mkdir crosstool-ng
 fi
-mkdir crosstool-ng
+
 cd crosstool-ng
 git init
 git fetch --depth=1 ${URL} ${REV}
