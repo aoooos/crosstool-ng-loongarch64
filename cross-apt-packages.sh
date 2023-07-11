@@ -29,12 +29,22 @@ apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install
   wget \
   xz-utils
 
-wget http://ftp.gnu.org/gnu/autoconf/autoconf-2.71.tar.xz
-tar xvf autoconf-2.71.tar.xz
-cd autoconf-2.71
-./configure
-make
-make install
-cd ..
-rm -rf autoconf-2.71
-rm autoconf-2.71.tar.xz
+
+required_version="2.71"
+installed_version=$(autoconf --version | awk 'NR==1{print $NF}')
+
+# 使用dpkg的--compare-versions选项来比较版本号
+if dpkg --compare-versions "$installed_version" "ge" "$required_version"; then
+    echo "autoconf is higher than $required_version"
+else
+    wget http://ftp.gnu.org/gnu/autoconf/autoconf-2.71.tar.xz
+    tar xvf autoconf-2.71.tar.xz
+    cd autoconf-2.71
+    ./configure
+    make
+    make install
+    cd ..
+    rm -rf autoconf-2.71
+    rm autoconf-2.71.tar.xz
+fi
+
