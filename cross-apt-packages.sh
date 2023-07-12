@@ -41,7 +41,7 @@ else
     tar xvf autoconf-2.71.tar.xz
     cd autoconf-2.71
     ./configure
-    make
+    make -j$(nproc)
     make install
     cd ..
     rm -rf autoconf-2.71
